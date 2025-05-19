@@ -8,15 +8,15 @@
 </head>
 <body>
     <div class="left">
-        <img src="images/Logo_project.png" alt="logo">
+        <img src="images/logo_black.png" alt="logo">
     </div>
-    <div class="right">
+    <div class="right" id="right">
         <div class="top">
             <div class="brand">
                 <img src="images/logo22.png" alt="logo">
                 <span>MatchHub</span>
             </div>
-            <a href="#">Create account</a>
+            <a id="register-btn" href="#">Create account</a>
         </div>
         <div class="forms">
             <div class="login">
@@ -26,7 +26,7 @@
                     <img src="images/google-icon.svg" alt="google-icon">
                     <span>Log in  with Google</span>
                 </div>
-                                <div class="login-option">
+                <div class="login-option">
                     <img src="images/github-icon.svg" alt="github-icon">
                     <span>Log in  with Github</span>
                 </div>
@@ -38,17 +38,32 @@
                         <input type="text" placeholder="Email or Username">
                         <input type="password" placeholder="Password">
                     </div>
-                    <div class="option-container">
+                    <div class="options-container">
                         <div class="checkbox">
                             <input id="checkbox" type="checkbox">
                             <label for="checkbox">Keep me signed in</label>
                         </div>
+                        <a href="#">Forgot password?</a>
                     </div>
+                    <button>Sign In</button>
                 </form>
+            </div>
+            <div class="register">
+                <h1 class="welcome-message">Welcome</h1>
+                <p class="login-description">Enter your account details.</p>
+                <div class="login-option">
+                    <img src="images/google-icon.svg" alt="google-icon">
+                    <span>Log in  with Google</span>
+                </div>
+                <div class="login-option">
+                    <img src="images/github-icon.svg" alt="github-icon">
+                    <span>Log in  with Github</span>
+                </div>
+                <p class="footer-note">By creating an account you agree with our <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a>, and our default <a href="#">Notification Settings.</a></p>
             </div>
         </div>
     </div>
 
-    <script src="/script.js"></script>
+    <script src="/src/js/login.js"></script>
 </body>
 </html>

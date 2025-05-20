@@ -67,7 +67,14 @@ body {
     font-size: 0.7rem;
     font-weight: 500;
 }
-
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+}
 .forms {
     display: flex;
     align-items: center;

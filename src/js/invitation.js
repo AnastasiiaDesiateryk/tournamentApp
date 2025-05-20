@@ -28,7 +28,7 @@ function getTournamentInvitations() {
     invitations = JSON.parse(localInvitations)
   }
 }
-
+// User to User
 function invite(inviter, invitee) {
   getInvitations();
   const invitation = {
@@ -39,18 +39,6 @@ function invite(inviter, invitee) {
   }
   invitations.push(invitation);
   localStorage.setItem(INVITATION_KEY, JSON.stringify(invitations))
-}
-
-function inviteToTournament(invitee, tournamentId) {
-  getTournamentInvitations();
-  const invitation = {
-    id: Math.floor(Math.random() * 10000000),
-    status: InvitationStatus.PENDING,
-    tournamentId: tournamentId,
-    invitee: invitee
-  }
-  tournamentInvitations.push(invitation);
-  localStorage.setItem(TOURNAMENT_INVITATION_KEY, JSON.stringify(tournamentInvitations))
 }
 
 function acceptInvitation(invitationId) {
@@ -72,6 +60,19 @@ const updateInvitationStatus = (invitationId, invitationStatus) => {
   localStorage.setItem(INVITATION_KEY, JSON.stringify(invitations))
 }
 
+// Admin to User
+
+function inviteToTournament(invitee, tournamentId) {
+  getTournamentInvitations();
+  const invitation = {
+    id: Math.floor(Math.random() * 10000000),
+    status: InvitationStatus.PENDING,
+    tournamentId: tournamentId,
+    invitee: invitee
+  }
+  tournamentInvitations.push(invitation);
+  localStorage.setItem(TOURNAMENT_INVITATION_KEY, JSON.stringify(tournamentInvitations))
+}
 
 function acceptTournamentInvitation(invitationId) {
   updateTournamentInvitationStatus(invitationId, InvitationStatus.ACCEPTED)

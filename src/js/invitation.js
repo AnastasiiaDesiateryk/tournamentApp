@@ -1,8 +1,8 @@
-let invitations = [];
-const INVITATION_KEY = "INVITATIONS";
-
-let tournamentInvitations = [];
+const GROUP_INVITATION_KEY = "GROUP_INVITATIONS";
 const TOURNAMENT_INVITATION_KEY = "TOURNAMENT_INVITATIONS";
+
+let groupInvitations = [];
+let tournamentInvitations = [];
 
 //Constant variables
 const InvitationStatus = {
@@ -11,71 +11,46 @@ const InvitationStatus = {
   PENDING: "PENDING"
 }
 
-function saveInvitations() {
-  localStorage.setItem(INVITATION_KEY, JSON.stringify(invitations))
+function saveGroupInvitations() {
+  localStorage.setItem(GROUP_INVITATION_KEY, JSON.stringify(groupInvitations))
 }
 
-function getInvitations() {
-  const localInvitations = localStorage.getItem(INVITATION_KEY)
+function getGroupInvitations() {
+  const localInvitations = localStorage.getItem(GROUP_INVITATION_KEY)
   if (localInvitations != null) {
-    invitations = JSON.parse(localInvitations)
+    groupInvitations = JSON.parse(localInvitations)
   }
+}
+
+function saveTournamentInvitations() {
+  localStorage.setItem(TOURNAMENT_INVITATION_KEY, JSON.stringify(tournamentInvitations))
 }
 
 function getTournamentInvitations() {
   const localInvitations = localStorage.getItem(TOURNAMENT_INVITATION_KEY)
   if (localInvitations != null) {
-    invitations = JSON.parse(localInvitations)
+    tournamentInvitations = JSON.parse(localInvitations)
   }
-}
-// User to User
-function invite(inviter, invitee) {
-  getInvitations();
-  const invitation = {
-    id: Math.floor(Math.random() * 10000000),
-    status: InvitationStatus.PENDING,
-    invitee: invitee,
-    inviter: inviter
-  }
-  invitations.push(invitation);
-  localStorage.setItem(INVITATION_KEY, JSON.stringify(invitations))
-}
-
-function acceptInvitation(invitationId) {
-  updateInvitationStatus(invitationId, InvitationStatus.ACCEPTED)
-}
-
-const rejectInvitation = (invitationId) => {
-  updateInvitationStatus(invitationId, InvitationStatus.REJECTED)
-}
-
-const updateInvitationStatus = (invitationId, invitationStatus) => {
-  getInvitations();
-  invitations = invitations.map(invitation => {
-    if (invitation.id == invitationId) {
-      invitation.status = invitationStatus
-    }
-    return invitation;
-  })
-  localStorage.setItem(INVITATION_KEY, JSON.stringify(invitations))
 }
 
 // Admin to User
 
-function inviteToTournament(invitee, tournamentId) {
+function inviteToTournament(userId, tournamentId) {
   getTournamentInvitations();
   const invitation = {
-    id: Math.floor(Math.random() * 10000000),
+    id: generateRandomId(),
     status: InvitationStatus.PENDING,
     tournamentId: tournamentId,
-    invitee: invitee
+    userId: userId
   }
   tournamentInvitations.push(invitation);
-  localStorage.setItem(TOURNAMENT_INVITATION_KEY, JSON.stringify(tournamentInvitations))
+  saveTournamentInvitations()
 }
 
 function acceptTournamentInvitation(invitationId) {
   updateTournamentInvitationStatus(invitationId, InvitationStatus.ACCEPTED)
+  const invitation = tournamentInvitations.find(item => item.id == invitationId);
+  addUserToTournament(invitation.userId, invitation.tournamentId);
 }
 
 const rejectTournamentInvitation = (invitationId) => {
@@ -90,5 +65,98 @@ const updateTournamentInvitationStatus = (invitationId, invitationStatus) => {
     }
     return invitation;
   })
-  localStorage.setItem(TOURNAMENT_INVITATION_KEY, JSON.stringify(tournamentInvitations))
+  saveTournamentInvitations();
 }
+
+// GROUP
+const inviteToGroup = (tournamentId, groupId, userId) => {
+  getGroupInvitations();
+  const newGroupInvitation = {
+    id: generateRandomId(),
+    status: InvitationStatus.PENDING,
+    groupId: groupId,
+    userId: userId,
+    tournamentId: tournamentId
+  }
+  groupInvitations.push(newGroupInvitation);
+  saveGroupInvitations()
+}
+
+function acceptGroupInvitation(invitationId) {
+  updateGroupInvitationStatus(invitationId, InvitationStatus.ACCEPTED)
+  const invitation = groupInvitations.find(item => item.id == invitationId);
+  addUserToGroup(invitation.tournamentId, invitation.groupId, invitation.userId);
+}
+
+const rejectGroupInvitation = (invitationId) => {
+  updateGroupInvitationStatus(invitationId, InvitationStatus.REJECTED)
+}
+
+const updateGroupInvitationStatus = (invitationId, invitationStatus) => {
+  getGroupInvitations();
+  groupInvitations = groupInvitations.map(invitation => {
+    if (invitation.id == invitationId) {
+      return {
+        ...invitation,
+        status: invitationStatus
+      }
+    }
+    return invitation;
+  })
+  saveGroupInvitations();
+}
+
+
+const createGroup = (tournamentId, newGroupName) => {
+  getTournaments();
+  tournaments = tournaments.map(tournament => {
+    if (tournament.id == tournamentId) {
+      const existingGroup = tournament.groups.find(group => group.name === newGroupName);
+      if (!existingGroup) {
+        const newGroup = {
+          id: generateRandomId(),
+          name: newGroupName,
+          users: []
+        }
+        return {
+          ...tournament,
+          groups: [...tournament.groups, newGroup]
+        }
+      }
+    }
+    return tournament;
+  })
+  saveTournaments();
+};
+
+const addUserToGroup = (tournamentId, groupId, userId) => {
+  getTournaments();
+  tournaments = tournaments.map(tournament => {
+    if (tournament.id == tournamentId) {
+      return {
+        ...tournament,
+        groups: tournament.groups.map(group => {
+          if (group.id == groupId) {
+            return {
+              ...group,
+              users: [...group.users, userId]
+            }
+          }
+          return group;
+        })
+      }
+    }
+    return tournament;
+  })
+  saveTournaments();
+}
+
+// createTournament("Test", "01.01.2026");
+// saveUsers();
+// createGroup("2535976", "TestGroup");
+// inviteToTournament("9004476", "2535976");
+// acceptTournamentInvitation("3678558");
+// inviteToGroup("2535976", "9147898", "9004476");
+// acceptGroupInvitation("7383936");
+getTournaments();
+console.log(generateRoundRobin(tournaments[1].groups[0].users));

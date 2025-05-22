@@ -13,6 +13,7 @@
   </header>
 
   <main>
+    <!-- Create Tournament Section -->
     <section class="admin-only">
       <h2>Create New Tournament</h2>
       <form id="tournamentForm">
@@ -22,17 +23,44 @@
       </form>
     </section>
 
+    <!-- User List & Invitations -->
     <section class="admin-only">
-      <h2>Manage Invitations</h2>
-      <!-- Later: list of players, invite buttons -->
-      <div id="invitationPanel">
-        <!-- JS will inject content -->
+      <h2>Invite Players</h2>
+      <div id="userList">
+        <!-- JS will dynamically list users with invite buttons -->
       </div>
     </section>
 
+    <!-- Group Management -->
     <section class="admin-only">
-      <h2>Manage Groups</h2>
-      <!-- Placeholder for future group logic -->
+      <h2>Create & Manage Groups</h2>
+      <form id="groupForm">
+        <input type="text" id="groupName" placeholder="Group Name" required />
+        <select id="tournamentSelect">
+          <option value="">Select Tournament</option>
+          <!-- JS will populate options -->
+        </select>
+        <button type="submit">Create Group</button>
+      </form>
+    </section>
+
+    <!-- Score Entry -->
+    <section class="admin-only">
+      <h2>Score Management & Winner Calculation</h2>
+      <div id="scoreManagement">
+        <!-- JS will provide score entry UI and winner calculation -->
+      </div>
+    </section>
+
+    <!-- Tournament Deletion -->
+    <section class="admin-only">
+      <h2>Delete Tournament</h2>
+      <form id="deleteTournamentForm">
+        <select id="deleteTournamentSelect">
+          <option value="">Select Tournament to Delete</option>
+        </select>
+        <button type="submit">Delete</button>
+      </form>
     </section>
   </main>
 

@@ -34,3 +34,49 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const user = JSON.parse(localStorage.getItem("matchhub_user"));
+    if (!user || user.role !== "admin") return;
+  
+    // Fill player dropdown
+    const playerSelect = document.getElementById("playerSelect");
+    if (playerSelect) {
+      users.forEach((u) => {
+        const option = document.createElement("option");
+        option.value = u.id;
+        option.textContent = u.name;
+        playerSelect.appendChild(option);
+      });
+    }
+  
+    // Fill tournament dropdown
+    const tournamentSelect = document.getElementById("tournamentSelectForInvite");
+    if (tournamentSelect) {
+      getTournaments().forEach((t) => {
+        const option = document.createElement("option");
+        option.value = t.id;
+        option.textContent = t.title;
+        tournamentSelect.appendChild(option);
+      });
+    }
+  
+    // Handle invite form submit
+    const inviteForm = document.getElementById("inviteForm");
+    if (inviteForm) {
+      inviteForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const userId = playerSelect.value;
+        const tournamentId = tournamentSelect.value;
+  
+        if (!userId || !tournamentId) {
+          alert("Please select both player and tournament.");
+          return;
+        }
+  
+        inviteToTournament(userId, tournamentId); // Uses your existing function
+        alert("Invitation sent!");
+        inviteForm.reset();
+      });
+    }
+  });

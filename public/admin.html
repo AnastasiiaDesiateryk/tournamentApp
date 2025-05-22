@@ -23,13 +23,25 @@
       </form>
     </section>
 
-    <!-- User List & Invitations -->
+  
+
     <section class="admin-only">
-      <h2>Invite Players</h2>
-      <div id="userList">
-        <!-- JS will dynamically list users with invite buttons -->
-      </div>
-    </section>
+        <h2>Invite Players to Tournament</h2>
+      
+        <form id="inviteForm">
+          <select id="playerSelect">
+            <option value="">Select a player</option>
+            <!-- JS fills in users -->
+          </select>
+      
+          <select id="tournamentSelectForInvite">
+            <option value="">Select a tournament</option>
+            <!-- JS fills in tournaments -->
+          </select>
+      
+          <button type="submit">Send Invitation</button>
+        </form>
+      </section>
 
     <!-- Group Management -->
     <section class="admin-only">

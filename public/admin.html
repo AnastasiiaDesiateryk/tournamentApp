@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | MatchHub</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Welcome, <span id="usernameDisplay"></span> (Admin)</h1>
+    <button id="logoutBtn">Logout</button>
+  </header>
+
+  <main>
+    <section class="admin-only">
+      <h2>Create New Tournament</h2>
+      <form id="tournamentForm">
+        <input type="text" id="tournamentTitle" placeholder="Tournament Title" required />
+        <input type="date" id="tournamentDate" required />
+        <button type="submit">Create Tournament</button>
+      </form>
+    </section>
+
+    <section class="admin-only">
+      <h2>Manage Invitations</h2>
+      <!-- Later: list of players, invite buttons -->
+      <div id="invitationPanel">
+        <!-- JS will inject content -->
+      </div>
+    </section>
+
+    <section class="admin-only">
+      <h2>Manage Groups</h2>
+      <!-- Placeholder for future group logic -->
+    </section>
+  </main>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/invitation.js"></script>
+  <script src="../js/tournament.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard | MatchHub</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Welcome, <span id="usernameDisplay"></span> (Player)</h1>
+    <button id="logoutBtn">Logout</button>
+  </header>
+
+  <main>
+    <section class="player-only">
+      <h2>Your Tournament Invitations</h2>
+      <div id="tournamentInvitations">
+        <!-- JS will render invitations here -->
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/invitation.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

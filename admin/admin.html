@@ -14,105 +14,89 @@
     </script>
 </head>
 <body>
-    <div class="dashboard">
-        <!--Sidebar-->
-        <aside class="sidebar">
-            <img class="logo_xs" width="200" height="50" src="../src/views/images/logo_blackxs.png" alt="Logo"/>
-            <ul>
-                <li class="active"> Dashboard</li>
-                <li> Tournaments</li>
-                <li>Settings</li>
-            </ul>
-        </aside>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <img class="logo_xs" width="200" height="50" src="../src/views/images/logo_blackxs.png" alt="Logo" />
+      <ul>
+        <li class="active">Dashboard</li>
+        <li>Tournaments</li>
+        <li>Settings</li>
+      </ul>
+    </aside>
 
-        <!--Main content-->
-        <main class="main-content">
-            <header>
-                <div class="admin-profile">
-                    <img src="../src/views/images/user-icon.png" alt="Admin Avatar">
-                    <div class="admin-info">
-                        <strong>Admin</strong> <br/>
-                        <small>matchhub@matchhubadmin.com</small>
-                    </div>
-                </div>
-                <button id="logoutBtn" class="logout-btn">Logout</button>
-            </header>
+    <!-- Main content area -->
+    <div class="main-area">
+      <main class="main-content">
+        <!-- Header -->
+        <header>
+          <div class="admin-profile">
+            <img src="../src/views/images/user-icon.png" alt="Admin Avatar" />
+            <div class="admin-info">
+              <strong>Admin</strong><br />
+              <small>matchhub@matchhubadmin.com</small>
+            </div>
+          </div>
+          <button id="logoutBtn" class="logout-btn">Logout</button>
+        </header>
 
-            <!--Stats section-->
-            <section class="stats">
-                <div class="card">
-                    <h3>Active Tournaments</h3>
-                    <p>3</p>
-                </div>
-                        <div class="card">
-                    <h3>Upcoming Matches</h3>
-                    <p>5</p>
-                </div>
-                        <div class="card">
-                    <h3>Participants</h3>
-                    <p>20</p>
-                </div>
-            </section>
+        <!-- Stats -->
+        <section class="stats">
+          <div class="card"><h3>Active Tournaments</h3><p>3</p></div>
+          <div class="card"><h3>Upcoming Matches</h3><p>5</p></div>
+          <div class="card"><h3>Participants</h3><p>20</p></div>
+        </section>
 
-            <!--Recent Matches-->
-            <section class="recent-matches">
-                <h3>Recetn Matches</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tournament</th>
-                            <th>Match</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Spring Showdown</td>
-                            <td>Team A vs Team B</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+        <!-- Recent Matches -->
+        <section class="recent-matches">
+          <h3>Recent Matches</h3>
+          <table>
+            <thead><tr><th>Tournament</th><th>Match</th></tr></thead>
+            <tbody><tr><td>Spring Showdown</td><td>Team A vs Team B</td></tr></tbody>
+          </table>
+        </section>
 
-            <!--Manage Tournaments-->
-            <section class="tournaments">
-                <div class="section-header">
-                    <h2>Manage Tournaments</h2>
-                    <button class="btn-primary">+ New Tournament</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Players</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Summer Cup</td>
-                            <td>Knockout</td>
-                            <td>16</td>
-                            <td>Active</td>
-                            <td>
-                                <button class="btn-secondary">View</button>
-                                <button class="btn-secondary">Edit</button>
-                                <button class="btn-danger">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Chess League</td>
-                            <td>Round Robin</td>
-                            <td>Completed</td>
-                            <td>
-                                <button class="btn-secondary">View</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </main>
+        <!-- Manage Tournaments -->
+        <section class="tournaments">
+          <div class="section-header">
+            <h2>Manage Tournaments</h2>
+            <button class="btn-primary">+ New Tournament</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th><th>Type</th><th>Players</th><th>Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Summer Cup</td><td>Knockout</td><td>16</td><td>Active</td>
+                <td>
+                  <button class="btn-secondary">View</button>
+                  <button class="btn-secondary">Edit</button>
+                  <button class="btn-danger">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Chess League</td><td>Round Robin</td><td>Completed</td>
+                <td><button class="btn-secondary">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+
+      <!-- Footer ALWAYS at bottom -->
+      <footer class="admin-footer">
+        <div class="footer-content">
+          <span>© 2025 MatchHub. All rights reserved.</span>
+          <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Support</a>
+          </div>
+        </div>
+      </footer>
     </div>
+  </div>
 </body>
-</html>

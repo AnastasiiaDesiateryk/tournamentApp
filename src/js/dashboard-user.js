@@ -69,6 +69,186 @@ const matches = [
     score: "1:3",
     winner: "Man City",
   },
+  {
+    group: "Group B",
+    round: "Round 2",
+    pitch: "Pitch 1",
+    time: "12:00",
+    teams: "Napoli vs Atlético",
+    score: "2:2",
+    winner: "Draw",
+  },
+  {
+    group: "Group B",
+    round: "Round 2",
+    pitch: "Pitch 2",
+    time: "12:00",
+    teams: "Atalanta vs Man City",
+    score: "1:3",
+    winner: "Man City",
+  },
+  {
+    group: "Group A",
+    round: "Semi-final",
+    pitch: "Pitch 1",
+    time: "13:00",
+    teams: "Liverpool vs Chelsea",
+    score: "1:1",
+    winner: "Draw",
+  },
+  {
+    group: "Group B",
+    round: "Semi-final",
+    pitch: "Pitch 2",
+    time: "13:00",
+    teams: "Barcelona vs Napoli",
+    score: "3:2",
+    winner: "Barcelona",
+  },
+  {
+    group: "Group A",
+    round: "Final",
+    pitch: "Pitch 1",
+    time: "14:00",
+    teams: "Barcelona vs Liverpool",
+    score: "2:0",
+    winner: "Barcelona",
+  },
+  {
+    group: "Group B",
+    round: "Final",
+    pitch: "Pitch 2",
+    time: "14:00",
+    teams: "Man City vs Atlético",
+    score: "1:1",
+    winner: "Draw",
+  },
+  {
+    group: "Group A",
+    round: "3rd Place",
+    pitch: "Pitch 1",
+    time: "15:00",
+    teams: "Chelsea vs Napoli",
+    score: "0:1",
+    winner: "Napoli",
+  },
+  {
+    group: "Group B",
+    round: "3rd Place",
+    pitch: "Pitch 2",
+    time: "15:00",
+    teams: "Inter vs Atalanta",
+    score: "2:2",
+    winner: "Draw",
+  },
+  {
+    group: "Group A",
+    round: "Consolation",
+    pitch: "Pitch 1",
+    time: "16:00",
+    teams: "Chelsea vs Atalanta",
+    score: "1:2",
+    winner: "Atalanta",
+  },
+  {
+    group: "Group B",
+    round: "Consolation",
+    pitch: "Pitch 2",
+    time: "16:00",
+    teams: "Napoli vs Inter",
+    score: "0:3",
+    winner: "Inter",
+  },
+  {
+    group: "Group A",
+    round: "Bonus Match",
+    pitch: "Pitch 1",
+    time: "17:00",
+    teams: "Barcelona vs Atlético",
+    score: "3:1",
+    winner: "Barcelona",
+  },
+  {
+    group: "Group B",
+    round: "Bonus Match",
+    pitch: "Pitch 2",
+    time: "17:00",
+    teams: "Man City vs Liverpool",
+    score: "2:2",
+    winner: "Draw",
+  },
+  {
+    group: "Group A",
+    round: "Late Game",
+    pitch: "Pitch 1",
+    time: "20:00",
+    teams: "Barcelona vs Inter",
+    score: "1:1",
+    winner: "Draw",
+  },
+  {
+    group: "Group B",
+    round: "Late Game",
+    pitch: "Pitch 2",
+    time: "20:00",
+    teams: "Chelsea vs Man City",
+    score: "0:2",
+    winner: "Man City",
+  },
+  {
+    group: "Group A",
+    round: "Night Showdown",
+    pitch: "Pitch 1",
+    time: "21:00",
+    teams: "Atlético vs Liverpool",
+    score: "1:4",
+    winner: "Liverpool",
+  },
+  {
+    group: "Group B",
+    round: "Night Showdown",
+    pitch: "Pitch 2",
+    time: "21:00",
+    teams: "Napoli vs Atalanta",
+    score: "2:2",
+    winner: "Draw",
+  },
+  {
+    group: "Group A",
+    round: "Closing Match",
+    pitch: "Pitch 1",
+    time: "22:00",
+    teams: "Barcelona vs Man City",
+    score: "1:0",
+    winner: "Barcelona",
+  },
+  {
+    group: "Group B",
+    round: "Closing Match",
+    pitch: "Pitch 2",
+    time: "22:00",
+    teams: "Inter vs Atlético",
+    score: "1:1",
+    winner: "Draw",
+  },
+  {
+    group: "Group A",
+    round: "Final Show",
+    pitch: "Pitch 1",
+    time: "23:00",
+    teams: "Liverpool vs Napoli",
+    score: "2:1",
+    winner: "Liverpool",
+  },
+  {
+    group: "Group B",
+    round: "Final Show",
+    pitch: "Pitch 2",
+    time: "23:00",
+    teams: "Chelsea vs Inter",
+    score: "0:0",
+    winner: "Draw",
+  },
 ];
 
 // === Utility ===
@@ -275,27 +455,50 @@ function renderAllMatches() {
 function renderResults() {
   const table = document.getElementById("results-table");
   table.innerHTML = "";
-  const results = {};
+
+  const resultsByGroup = {};
+  const globalResults = {};
 
   matches.forEach(({ group, winner }) => {
-    if (!results[group]) results[group] = {};
-    if (winner !== "Draw") {
-      results[group][winner] = (results[group][winner] || 0) + 1;
-    }
+    if (winner === "Draw") return;
+
+    if (!resultsByGroup[group]) resultsByGroup[group] = {};
+    resultsByGroup[group][winner] = (resultsByGroup[group][winner] || 0) + 1;
+
+    globalResults[winner] = (globalResults[winner] || 0) + 1;
   });
 
-  Object.keys(results).forEach((group) => {
+  // === Grouped Results ===
+  Object.keys(resultsByGroup).forEach((group) => {
     const div = document.createElement("div");
-    div.innerHTML = `<h5>${group}</h5>`;
+    div.innerHTML = `<h5>Group: ${group}</h5>`;
     const ul = document.createElement("ul");
-    Object.entries(results[group])
+
+    Object.entries(resultsByGroup[group])
       .sort((a, b) => b[1] - a[1])
       .forEach(([team, wins]) => {
         const li = document.createElement("li");
         li.textContent = `${team} - ${wins} win(s)`;
         ul.appendChild(li);
       });
+
     div.appendChild(ul);
     table.appendChild(div);
   });
+
+  // === Global Results ===
+  const globalDiv = document.createElement("div");
+  globalDiv.innerHTML = `<h5 class="mt-4">🌍 Global Standings</h5>`;
+  const globalUl = document.createElement("ul");
+
+  Object.entries(globalResults)
+    .sort((a, b) => b[1] - a[1])
+    .forEach(([team, wins]) => {
+      const li = document.createElement("li");
+      li.textContent = `${team} - ${wins} win(s) total`;
+      globalUl.appendChild(li);
+    });
+
+  globalDiv.appendChild(globalUl);
+  table.appendChild(globalDiv);
 }

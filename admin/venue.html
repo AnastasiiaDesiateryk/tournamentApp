@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Venue Settings</title>
+  <link rel="stylesheet" href="admin-css/venue.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="form-navbar">
+    <div class="navbar-content">
+      <img src="../src/views/images/logo_blackxs.png" alt="MatchHub Logo" class="navbar-logo" />
+    </div>
+  </header>
+  <main class="venue-container">
+    <h2>Venue settings</h2>
+    
+    <form>
+      <label for="address">Choose a venue</label>
+      <input type="text" id="address" placeholder="123 Match Street, City" />
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="online-checkbox" />
+        <label for="online-checkbox">This is an online tournament</label>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="back">Back</button>
+        <button type="submit" class="save">Save & Continue</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

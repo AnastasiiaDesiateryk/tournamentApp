@@ -1,13 +1,3 @@
-const right = document.getElementById('right')
-const registerBtn = document.getElementById('register-btn')
-
-registerBtn.addEventListener('click', () => {
-    right.classList.toggle('active');
-    registerBtn.textContent =right.classList.contains('active')
-    ? 'Acces Account'
-    : 'Create Account'
-});
-
 const USERS = [
     { username: "admin", password: "matchHub", role: "admin" },
     { username: "player1", password: "player123", role: "player" }
@@ -19,8 +9,8 @@ const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const username = document.getElementById("Username").value.trim();
-    const password = document.getElementById("Password").value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
 
     const user = USERS.find(u => u.username === username && u.password === password);
 

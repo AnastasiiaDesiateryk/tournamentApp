@@ -191,31 +191,6 @@ form button{
     height: 2.5rem;
 }
 
-.register{
-    display: none;
-}
-
-.register .footer-note {
-    color: var(--color-black);
-    font-size: 0.6rem;
-    width: 18rem;
-    margin-top: 2.5rem;
-    text-align: center;
-}
-
-.register .footer-note a{
-    color: var(--color-black);
-    font-weight: 500;
-}
-
-.right.active .login{
-    display: none;
-}
-
-.right.active .register{
-    display: block;
-}
-
 @media (max-width:800px) {
     .left{
         display: none;

@@ -15,7 +15,7 @@ loginForm.addEventListener("submit", function (e) {
             username: user.username,
             role: user.role
         })
-        window.location.href = "../../admin/admin.html";
+        window.location.href = "../../admin/dashboard.html";
         // if (user.role === "admin") {
         //     window.location.href = "../../admin/admin.html";
         // } else if (user.role === "player") {

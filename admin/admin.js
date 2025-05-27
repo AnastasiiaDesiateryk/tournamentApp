@@ -32,7 +32,8 @@ const renderManagedTournamentsTable = () => {
           <button class="btn-danger" onclick="deleteTournamentItem(${tournamentItem.id})">Delete</button>
         </td>
         `
-        : `<td>\
+        :
+        `<td>\
         <button class="btn-secondary">View</button>
         </td>`}
       </tr>

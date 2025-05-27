@@ -58,7 +58,7 @@ const createNewTournament = () => {
     console.log(newTournament)
     createTournament(newTournament);
   }
-  window.location.href = "./admin.html";
+  window.location.href = "./dashboard.html";
 }
 
 createTournamentSubmitButton.addEventListener("click", createNewTournament);

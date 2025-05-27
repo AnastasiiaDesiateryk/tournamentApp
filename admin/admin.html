@@ -1,92 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard - MatchHub</title>
-    <link rel="stylesheet" href="admin-css/admin.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-    <script>
-    const user = JSON.parse(localStorage.getItem("matchhub_user"));
-    if (!user || user.role !== "admin") {
-        window.location.href = "../src/views/login.html";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - MatchHub</title>
+  <link rel="stylesheet" href="admin-css/admin.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    .tournament-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 2rem;
     }
-    </script>
+
+    .tournament-card {
+      background-color: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #1e3a8a;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .tournament-info {
+      flex: 1;
+    }
+
+    .tournament-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .tournament-card h3 {
+      margin: 0 0 0.4rem;
+      color: #1f2937;
+      font-size: 1.2rem;
+    }
+
+    .tournament-card p {
+      margin: 0.2rem 0;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .btn-secondary,
+    .btn-danger {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background-color: #e0e7ff;
+      color: #1e3a8a;
+    }
+
+    .btn-danger {
+      background-color: #fee2e2;
+      color: #b91c1c;
+    }
+  </style>
 </head>
 <body>
   <div class="dashboard">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <img class="logo_xs" width="200" height="50" src="../src/views/images/logo_blackxs.png" alt="Logo" />
+      <img id="logoRedirect" class="logo_xs" width="200" height="50" src="../src/views/images/logo_blackxs.png" alt="Logo" />
       <ul>
-        <li class="active">Dashboard</li>
-        <li>Tournaments</li>
-        <li>Settings</li>
+        <li class="nav-item active" data-section="dashboard-section">Dashboard</li>
+        <li class="nav-item" data-section="tournaments-section">Tournaments</li>
+        <li class="nav-item" data-section="settings-section">Settings</li>
       </ul>
     </aside>
 
-    <!-- Main content area -->
+    <!-- Main Area -->
     <div class="main-area">
-      <main class="main-content">
-        <!-- Header -->
-        <header>
-          <div class="admin-profile">
-            <img src="../src/views/images/user-icon.png" alt="Admin Avatar" />
-            <div class="admin-info">
-              <strong>Admin</strong><br />
-              <small>matchhub@matchhubadmin.com</small>
-            </div>
+      <header>
+        <div class="admin-profile">
+          <img src="../src/views/images/user-icon.png" alt="Admin Avatar" />
+          <div class="admin-info">
+            <strong>Admin</strong><br />
+            <small>matchhub@matchhubadmin.com</small>
           </div>
-          <button id="logoutBtn" class="logout-btn">Logout</button>
-        </header>
+        </div>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </header>
 
-        <!-- Stats -->
-        <section class="stats">
-          <div class="card"><h3>Active Tournaments</h3><p>3</p></div>
-          <div class="card"><h3>Upcoming Matches</h3><p>5</p></div>
-          <div class="card"><h3>Participants</h3><p>20</p></div>
+      <main class="main-content">
+        <!-- DASHBOARD -->
+        <section id="dashboard-section" class="admin-section">
+          <h2>Welcome to the Admin Dashboard</h2>
+          <p>Use the sidebar to manage tournaments, settings, and more.</p>
         </section>
 
-        <!-- Recent Matches -->
-        <section class="recent-matches">
-          <h3>Recent Matches</h3>
-          <table>
-            <thead><tr><th>Tournament</th><th>Match</th></tr></thead>
-            <tbody><tr><td>Spring Showdown</td><td>Team A vs Team B</td></tr></tbody>
-          </table>
-        </section>
-
-        <!-- Manage Tournaments -->
-        <section class="tournaments">
+        <!-- TOURNAMENTS -->
+        <section id="tournaments-section" class="admin-section d-none">
           <div class="section-header">
             <h2>Manage Tournaments</h2>
             <a href="forms.html" class="btn-primary">+ New Tournament</a>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th><th>Type</th><th>Players</th><th>Status</th><th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Summer Cup</td><td>Knockout</td><td>16</td><td>Active</td>
-                <td>
-                  <button class="btn-secondary">View</button>
-                  <button class="btn-secondary">Edit</button>
-                  <button class="btn-danger">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Chess League</td><td>Round Robin</td><td>Completed</td>
-                <td><button class="btn-secondary">View</button></td>
-              </tr>
-            </tbody>
-          </table>
+          <div id="tournamentList" class="tournament-list"></div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="settings-section" class="admin-section d-none">
+          <h3>Settings</h3>
+          <p>Coming soon...</p>
         </section>
       </main>
 
-      <!-- Footer ALWAYS at bottom -->
       <footer class="admin-footer">
         <div class="footer-content">
           <span>© 2025 MatchHub. All rights reserved.</span>
@@ -99,4 +128,20 @@
       </footer>
     </div>
   </div>
+
+  <!-- JS Files -->
+  <script src="../admin/admin.js"></script>
 </body>
+</html>
+
+<!-- Invite Player Modal -->
+<div id="inviteModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span id="closeInviteModal" class="close">&times;</span>
+    <h3>Invite Players</h3>
+    <ul id="playerListToInvite">
+      <!-- Player checkboxes will be injected here -->
+    </ul>
+    <button id="sendInvitesBtn" class="btn-primary">Send Invites</button>
+  </div>
+</div>

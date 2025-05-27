@@ -1,0 +1,123 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+    color: #1F2D3D;
+}
+
+.tournament-dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: #182129;
+    color: white;
+    width: 240px;
+    padding: 2rem 1.5rem;
+    flex-shrink: 0;
+}
+
+.sidebar .logo_xs {
+    display: block;
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.sidebar li.active {
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+.main-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    min-height: 100vh;
+    background-color: #f9fafb;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: #1f2d3d;
+    margin: 0;
+}
+
+.btn-secondary {
+    background-color: #e0e7ff;
+    color: #1e3a8a;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+#playerList {
+    list-style: none;
+    padding: 0;
+}
+
+#playerList li {
+    background-color: #fff;
+    margin-bottom: 0.5rem;
+    padding: 0.8rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+#matchList {
+    margin-top: 1rem;
+}
+
+#matchList .match-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+#matchList .match-card input {
+    padding: 0.4rem;
+    width: 60px;
+    margin: 0 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tournament Detail - MatchHub</title>
+  <link rel="stylesheet" href="../admin/tournament.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="tournament-dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <img id="logoRedirect" class="logo_xs" src="../src/views/images/logo_blackxs.png" alt="Logo" />
+      <ul>
+        <li class="nav-item active" data-tab="overview">Overview</li>
+        <li class="nav-item" data-tab="players">Teams / Players</li>
+        <li class="nav-item" data-tab="matches">Matches</li>
+      </ul>
+    </aside>
+
+    <!-- Main Area -->
+    <div class="main-content">
+      <header>
+        <h1 id="tournamentName">Tournament Name</h1>
+        <button id="backBtn" class="btn-secondary">← Back</button>
+      </header>
+
+      <main>
+        <section id="overview" class="tab-content active">
+          <h2>Overview</h2>
+          <p><strong>Type:</strong> <span id="overviewType"></span></p>
+          <p><strong>Location:</strong> <span id="overviewLocation"></span></p>
+          <p><strong>Date:</strong> <span id="overviewDate"></span></p>
+          <p><strong>Description:</strong> <span id="overviewDescription"></span></p>
+        </section>
+
+        <section id="players" class="tab-content">
+          <h2>Players</h2>
+          <ul id="playerList"></ul>
+        </section>
+
+        <section id="matches" class="tab-content">
+          <h2>Matches</h2>
+          <div id="matchList">Loading matches...</div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/tournament.js"></script>
+</body>
+</html>

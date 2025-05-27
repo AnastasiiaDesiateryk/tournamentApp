@@ -1,73 +1,122 @@
+/* forms.css – adapted to match admin.html design */
+
 body {
-    background-color: #f9fafb;
-    font-family: 'Inter', sans-serif;
     margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+    color: #1f2d3d;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: #182129;
+    color: white;
+    width: 240px;
+    padding: 2rem 1.5rem;
+    flex-shrink: 0;
+}
+
+.sidebar .logoxs {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.sidebar ul {
+    list-style: none;
     padding: 0;
 }
 
-.form-navbar {
-    background-color: #182129;
-    color: white;
-    padding: 1rem 2rem;
+.sidebar li {
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.sidebar li.active {
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+.main-area {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-height: 100vh;
+    background-color: #f9faf9;
 }
 
-.navbar-content {
+.main-content {
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.admin-profile {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
-.navbar-logo {
+.admin-profile img {
+    border-radius: 50%;
+    width: 40px;
     height: 40px;
-    width: auto;
 }
 
-.navbar-title {
-    font-size: 1.5rem;
+.admin-info small {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.logout-btn {
+    margin-left: auto;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
     font-weight: 600;
-    margin: 0;
 }
 
-.form-container {
+.logout-btn:hover {
+    background-color: #dc2626;
+}
+
+.form-wrapper {
     max-width: 600px;
-    margin: 3rem auto;
+    margin: 0 auto;
     padding: 2rem;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-h1 {
-    margin-bottom: 0.5rem;
-    color: #1f2d3d;
-}
-
-.step-indicator {
-    color: #6b7280;
-    font-size: 0.9rem;
-    margin-bottom: 2rem;
-}
-
-.form-step {
-    display: none;
-}
-
-.form-step.active {
-    display: block;
+.form-group {
+    margin-bottom: 1.5rem;
 }
 
 label {
     display: block;
-    margin: 1rem 0 0.5rem;
+    margin-bottom: 0.5rem;
     font-weight: 500;
 }
 
 input[type="text"],
-input[type="date"] {
+input[type="date"],
+select,
+textarea {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #d1d5db;
@@ -75,14 +124,8 @@ input[type="date"] {
     font-size: 1rem;
 }
 
-input[type="checkbox"] {
-    margin-right: 0.5rem;
-}
-
-.form-navigation {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: space-between;
+textarea {
+    resize: vertical;
 }
 
 .btn-primary {
@@ -95,13 +138,43 @@ input[type="checkbox"] {
     font-weight: 600;
 }
 
-.btn-secondary {
-    background-color: #e0e7ff;
-    color: #1e3a8a;
-    padding: 0.6rem 1.2rem;
-    border: none;
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.success-message {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #e0ffe0;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
     border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    margin-top: 1rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.admin-footer {
+    background-color: #1f2d3d;
+    color: #e5e7eb;
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-links a {
+    color: #e5e7eb;
+    text-decoration: none;
+    margin-left: 1.5rem;
+}
+
+.footer-links a:hover {
+    color: #60a5fa;
 }

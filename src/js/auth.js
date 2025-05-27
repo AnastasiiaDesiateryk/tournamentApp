@@ -1,5 +1,3 @@
-// src/js/auth.js
-
 document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem("matchhub_user"));
   

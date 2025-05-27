@@ -1,39 +1,18 @@
+// tournament.js
+
 const TOURNAMENTS_KEY = "TOURNAMENTS";
-let users = [];
+let players = [];
 let tournaments = [];
 
-
 const generateRandomId = () => {
-  const id = Math.floor(Math.random() * 10000000)
-  return id.toString();
-}
+  return Math.floor(Math.random() * 10000000).toString();
+};
 
-const user1 = {
+// Dummy players
+players = Array.from({ length: 10 }, (_, i) => ({
   id: generateRandomId(),
-  name: "User1"
-}
-
-const user2 = {
-  id: generateRandomId(),
-  name: "User2"
-}
-
-const user3 = {
-  id: generateRandomId(),
-  name: "User3"
-}
-
-const user4 = {
-  id: generateRandomId(),
-  name: "User4"
-}
-
-const user5 = {
-  id: generateRandomId(),
-  name: "User5"
-}
-
-users = [user1, user2, user3, user4, user5];
+  name: `Player ${i + 1}`
+}));
 
 const getTournaments = () => {
   const tempTournaments = localStorage.getItem(TOURNAMENTS_KEY);
@@ -41,66 +20,53 @@ const getTournaments = () => {
     tournaments = JSON.parse(tempTournaments);
   }
   return tournaments;
-}
+};
+
 const saveTournaments = () => {
   localStorage.setItem(TOURNAMENTS_KEY, JSON.stringify(tournaments));
-}
+};
 
-// DELETE THIS FUNCTION
-const saveUsers = () => {
-  const tempUsers = localStorage.getItem("USERS");
-  if (tempUsers) {
-    users = JSON.parse(tempUsers);
-  }
-}
-
-const createTournament = (title, date) => {
+const createTournament = (title, date, type, location, description) => {
   getTournaments();
   const newTournament = {
     id: generateRandomId(),
-    title: title,
-    date: date,
-    users: [],
+    title,
+    date,
+    type,
+    location,
+    description,
+    players: [],
     groups: []
-  }
+  };
   tournaments.push(newTournament);
   saveTournaments();
-}
+};
 
-
-const addUserToTournament = (userId, tournamentId) => {
+const addPlayerToTournament = (playerId, tournamentId) => {
   getTournaments();
-  tournaments = tournaments.map(tournament => {
-    if (tournament.id == tournamentId) {
-      return {
-        ...tournament,
-        users: [...tournament.users, userId]
-      }
+  tournaments = tournaments.map(t => {
+    if (t.id == tournamentId && !t.players.includes(playerId)) {
+      return { ...t, players: [...t.players, playerId] };
     }
-    return tournament;
-  })
-  console.log(tournamentId)
-  console.log("Saved Tournament...", tournaments)
+    return t;
+  });
   saveTournaments();
-}
+};
 
-const generateRoundRobin = (users) => {
-  // [ [ [1,2],[3,4] ], [ [1,3], [2,4] ], [ [1,4], [2,3] ] ]
-  if (users.length % 2 !== 0) {
-    users.push("-1");
+const generateRoundRobin = (players) => {
+  if (players.length % 2 !== 0) {
+    players.push("-1");
   }
   const matches = [];
-  const numRounds = users.length - 1;
-  const halfSize = users.length / 2;
+  const numRounds = players.length - 1;
+  const halfSize = players.length / 2;
 
-
-  const userList = users.slice();
-  const fixed = userList[0];
-  const rotating = userList.slice(1);
+  const playerList = players.slice();
+  const fixed = playerList[0];
+  const rotating = playerList.slice(1);
 
   for (let round = 0; round < numRounds; round++) {
-    const roundMatches = [];
-    roundMatches.push([fixed, rotating[rotating.length - 1]]);
+    const roundMatches = [[fixed, rotating[rotating.length - 1]]];
 
     for (let i = 0; i < halfSize - 1; i++) {
       roundMatches.push([rotating[i], rotating[rotating.length - 2 - i]]);
@@ -111,11 +77,11 @@ const generateRoundRobin = (users) => {
   }
 
   return matches;
-}
+};
 
-function generateKnockout(users) {
+const generateKnockout = (players) => {
   const rounds = [];
-  let currentRound = [...users];
+  let currentRound = [...players];
 
   if (currentRound.length % 2 !== 0) {
     currentRound.push({ id: -1, name: "ByPass" });
@@ -143,4 +109,65 @@ function generateKnockout(users) {
   }
 
   return rounds;
-}
+};
+
+const displayMatchesForTournament = (tournament) => {
+  const container = document.getElementById("matchList");
+  container.innerHTML = "";
+
+  let matches = [];
+  if (tournament.type === "Round Robin") {
+    matches = generateRoundRobin(tournament.players);
+  } else if (tournament.type === "Knockout") {
+    matches = generateKnockout(tournament.players);
+  }
+
+  matches.forEach((round, roundIndex) => {
+    const roundDiv = document.createElement("div");
+    roundDiv.innerHTML = `<h4>Round ${roundIndex + 1}</h4>`;
+    round.forEach(([p1, p2]) => {
+      const player1 = players.find(p => p.id == p1 || p.name === p1)?.name || "TBD";
+      const player2 = players.find(p => p.id == p2 || p.name === p2)?.name || "TBD";
+      const match = document.createElement("p");
+      match.textContent = `${player1} vs ${player2}`;
+      roundDiv.appendChild(match);
+    });
+    container.appendChild(roundDiv);
+  });
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) {
+    backBtn.addEventListener("click", function () {
+      window.location.href = "admin.html";
+    });
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const tournamentId = urlParams.get("id");
+
+  const tournaments = getTournaments();
+  const tournament = tournaments.find(t => t.id === tournamentId);
+
+  if (tournament) {
+    document.getElementById("tournamentName").textContent = tournament.title;
+    document.getElementById("overviewType").textContent = tournament.type || "N/A";
+    document.getElementById("overviewLocation").textContent = tournament.location || "N/A";
+    document.getElementById("overviewDate").textContent = tournament.date || "N/A";
+    document.getElementById("overviewDescription").textContent = tournament.description || "N/A";
+
+    const playerList = document.getElementById("playerList");
+    playerList.innerHTML = "";
+    tournament.players.forEach(playerId => {
+      const player = players.find(p => p.id == playerId);
+      if (player) {
+        const li = document.createElement("li");
+        li.textContent = player.name;
+        playerList.appendChild(li);
+      }
+    });
+
+    displayMatchesForTournament(tournament);
+  }
+});

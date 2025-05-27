@@ -37,9 +37,10 @@ body {
 }
 
 .right {
-
     width: 60%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .right .top {
@@ -58,15 +59,17 @@ body {
     gap: 0.1rem;
 }
 
-.right .top img{
+.right .top img {
     width: 1.5rem;
 }
 
-.right .top a{
+.right .top a {
     color: var(--color-black);
     font-size: 0.7rem;
     font-weight: 500;
+    text-decoration: none;
 }
+
 .brand-link {
     display: flex;
     align-items: center;
@@ -75,55 +78,40 @@ body {
     color: inherit;
     font-weight: bold;
 }
+
+/* Forms Container */
 .forms {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 90%;
+    justify-content: flex-start;
+    gap: 2rem;
+    height: 100%;
     width: 100%;
+    padding-top: 2rem;
+    overflow-y: auto;
+}
+
+.forms .login,
+.forms .register {
+    width: 90%;
+    max-width: 400px;
+    padding: 2rem;
+    border: 1px solid var(--color-gray-light);
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px var(--color-shadow);
 }
 
 .forms .welcome-message {
     font-size: 1.4rem;
-    font-weight: 500;
-    margin-bottom: 0.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
     text-align: center;
     width: 100%;
 }
 
-.forms .login-description {
-    font-size: 0.7rem;
-    margin-bottom: 1.6rem;
-    text-align: center;
-}
-
-.login-option {
-    display: flex;
-    align-items: center;
-    border: 2px solid var(--color-black);
-    border-radius: 0.3rem;
-    cursor: pointer;
-    gap: 0.5rem;
-    height: 2.5rem;
-    width: 18rem;
-    justify-content: center;
-    margin-bottom: 0.6rem;
-}
-
-.login-option:hover {
-    background-color: var(--color-hover-options);
-}
-
-.forms .login-option img {
-    width: 1.2rem;
-}
-
-.forms .login-option span {
-    font-size: 0.7rem;
-    font-weight: 700;
-}
-
-.forms .line-with-text {
+.line-with-text {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -132,8 +120,8 @@ body {
     margin: 1.5rem 0;
 }
 
-.forms .line-with-text::before,
-.forms .line-with-text::after {
+.line-with-text::before,
+.line-with-text::after {
     content: '';
     border-bottom: 2px solid var(--color-black);
     flex: 1;
@@ -150,11 +138,11 @@ form .input-container {
 form .input-container input {
     border: 2px solid var(--color-gray-light);
     border-radius: 0.3rem;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    height: 2.4rem;
+    height: 2.5rem;
+    padding: 0.2rem 0.6rem;
     outline: none;
-    padding: 0.2rem 0.5rem;
 }
 
 form .options-container {
@@ -162,40 +150,44 @@ form .options-container {
     align-items: center;
     font-size: 0.7rem;
     justify-content: space-between;
-    margin: 0.3rem 0 2rem;
+    margin: 0.5rem 0 1rem;
 }
 
-form .options-container .checkbox{
+form .options-container .checkbox {
     display: flex;
     align-items: center;
-    gap: 0.2rem;
+    gap: 0.3rem;
 }
 
-form .options-container input{
+form .options-container input {
     cursor: pointer;
 }
 
-form .options-container label,
-form .options-container a{
-    color: var(--color-black);
-    font-weight: 600;
-}
-
-form button{
+form button {
     background-color: var(--color-black);
     color: var(--color-white);
+    border: none;
     border-radius: 0.3rem;
     cursor: pointer;
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
     height: 2.5rem;
+    transition: background-color 0.3s ease;
 }
 
-@media (max-width:800px) {
-    .left{
+form button:hover {
+    background-color: #333;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .left {
         display: none;
     }
-    .right{
+    .right {
         width: 100%;
+    }
+    .forms {
+        padding: 1rem;
     }
 }

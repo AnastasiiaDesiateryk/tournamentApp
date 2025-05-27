@@ -1,56 +1,46 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const steps = document.querySelectorAll(".form-step");
-    const nextBtns = document.querySelectorAll(".next-btn");
-    const prevBtns = document.querySelectorAll(".prev-btn");
-    const stepNumber = document.getElementById("step-number");
-    const onlineCheckbox = document.getElementById("online");
-    const venueField = document.getElementById("venue-field");
-    const addParticipantBtn = document.getElementById("addParticipant");
-    const participantsContainer = document.getElementById("participants");
+// File: forms.js
 
-    let currentStep = 0;
-
-    function showStep(index) {
-        steps.forEach((step, i) => {
-            step.classList.toggle("active", i === index);
-        });
-        stepNumber.textContent = index + 1;
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("tournamentForm");
+    const successMessage = document.getElementById("successMessage");
+  
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+  
+      // Get input values
+      const name = document.getElementById("tournamentName").value.trim();
+      const type = document.getElementById("tournamentType").value;
+      const location = document.getElementById("location").value.trim();
+      const date = document.getElementById("date").value;
+      const description = document.getElementById("description").value.trim();
+  
+      // Create tournament object
+      const tournament = {
+        id: generateId(),
+        name,
+        type,
+        location,
+        date,
+        description,
+        players: [], // Empty player list (can be filled later)
+        status: "Upcoming"
+      };
+  
+      // Save to localStorage
+      const existingTournaments = JSON.parse(localStorage.getItem("TOURNAMENTS")) || [];
+      existingTournaments.push(tournament);
+      localStorage.setItem("TOURNAMENTS", JSON.stringify(existingTournaments));
+  
+      // Show success message and clear form
+      form.reset();
+      successMessage.style.display = "block";
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 2500);
+    });
+  
+    // Helper: Random ID generator
+    function generateId() {
+      return Math.floor(Math.random() * 10000000).toString();
     }
-
-    nextBtns.forEach(btn => {
-        btn.addEventListener("click", () =>{
-            if (currentStep < steps.length -1) {
-                currentStep++;
-                showStep(currentStep);
-            }
-        });
-    });
-
-    prevBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            if(currentStep > 0) {
-                currentStep--;
-                showStep(currentStep);
-            }
-        });
-    });
-
-    onlineCheckbox.addEventListener("change", () => {
-        venueField.style.display = onlineCheckbox.checked ? "none" : "block";
-    });
-
-    addParticipantBtn.addEventListener("click", () => {
-        const count = participantsContainer.querySelectorAll("input").length + 1;
-        const newInput = document.createElement("input");
-        newInput.type = "text";
-        newInput.name = "participant[]";
-        newInput.placeholder = `Participant ${count}`;
-        newInput.style.marginTop = "1rem";
-        participantsContainer.appendChild(newInput);
-    });
-
-    document.getElementById("multiStepForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-        alert("Form submitted!");
-    });
-});
+  });

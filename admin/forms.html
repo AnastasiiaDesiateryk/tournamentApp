@@ -1,70 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Tournament</title>
-    <link rel="stylesheet" href="forms.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Tournament - MatchHub</title>
+  <link rel="stylesheet" href="../admin/forms.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
-    <header class="form-navbar">
-    <div class="navbar-content">
-        <img src="../src/views/images/logo_blackxs.png" alt="MatchHub Logo" class="navbar-logo" />
-    </div>
-    </header>
 <body>
-    <div class="form-container">
-        <h1> Create New Tournament</h1>
-        <p class="step-indicator">Step <span id="step-number">1</span> of 3</p>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <img id="logoRedirect" class="logoxs" width="200" height="50" src="../src/views/images/logo_blackxs.png" alt="Logo" />
+      <ul>
+        <li class="nav-item" onclick="location.href='admin.html'">Dashboard</li>
+        <li class="nav-item active" onclick="location.href='tournaments.html'">Tournaments</li>
+        <li class="nav-item" onclick="location.href='settings.html'">Settings</li>
+      </ul>
+    </aside>
 
-        <form id="multiStepForm">
-            <!--Step 1: Tournament Info-->
-            <div class="form-step active" data-step="1">
-                <label for="tournament-name">Tournament Name</label>
-                <input type="text" id="tournament-name" required>
+    <!-- Main Area -->
+    <div class="main-area">
+      <header>
+        <div class="admin-profile">
+          <img src="../src/views/images/user-icon.png" alt="Admin Avatar" />
+          <div class="admin-info">
+            <strong>Admin</strong><br />
+            <small>matchhub@matchhubadmin.com</small>
+          </div>
+        </div>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </header>
 
-                <label for="date">Start Date</label>
-                <input type="date" id="date" required>
-
-                <div class="form navigation">
-                    <span></span>
-                    <button type="button" class="btn-primary next-btn">Next</button>
-                </div>
+      <main class="main-content">
+        <div class="form-wrapper">
+          <h2>Create a New Tournament</h2>
+          <form id="tournamentForm">
+            <div class="form-group">
+              <label for="tournamentName">Tournament Name</label>
+              <input type="text" id="tournamentName" required />
             </div>
 
-            <!-- Step 2: Venue-->
-            <div class="form-step" data-step="2">
-                <div id="venue-field">
-                    <label for="venue"> Venue Address</label>
-                    <input type="text" id="venue" placeholder="e.g Geneva Arena"/>
-                </div>
-
-                <label>
-                    <input type="checkbox" id="online"/>
-                    This is an online tournament
-                </label>
-
-                <div class="form-navigation">
-                    <button type="button" class="btn-secondary prev-btn">Back</button>
-                    <button type="button" class="btn-primary next-btn">Next</button>
-                </div>
+            <div class="form-group">
+              <label for="tournamentType">Tournament Type</label>
+              <select id="tournamentType" required>
+                <option value="">Select type</option>
+                <option value="Knockout">Knockout</option>
+                <option value="Round Robin">Round Robin</option>
+              </select>
             </div>
 
-            <!-- Step 3: Participants-->
-            <div class="form-step" data-step="3">
-                <div id="participant">
-                    <label ></label>
-                    <input type="text" name="participant[]" placeholder="Participant"/>
-                </div>
-
-                <button type="button" id="addParticipant" class="btn-secondary">+ Add Participant</button>
-
-                <div class="form-navigation">
-                    <button type="button" class="btn-secondary prev-btn">Back</button>
-                    <button type="submit" class="btn-primary">Submit</button>
-                </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" required />
             </div>
-        </form>
+
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" required />
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id="description" rows="4"></textarea>
+            </div>
+
+            <button class="btn-primary" type="submit">Create Tournament</button>
+          </form>
+
+          <div id="successMessage" class="success-message" style="display: none;">
+            ✅ Tournament successfully created!
+          </div>
+        </div>
+      </main>
+
+      <footer class="admin-footer">
+        <div class="footer-content">
+          <span>© 2025 MatchHub. All rights reserved.</span>
+          <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Support</a>
+          </div>
+        </div>
+      </footer>
     </div>
-    <script src="forms.js"></script>
+  </div>
+
+  <script src="../admin/forms.js"></script>
 </body>
 </html>

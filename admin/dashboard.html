@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - MatchHub</title>
+  <link rel="stylesheet" href="admin-css/admin.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script defer src="../data/data.js"></script>
+  <script defer src="../src/js/tournament.js"></script>
+  <script defer src="admin.js"></script>
+</head>
+
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <img class="logo_xs" width="200" height="50" src="../src/views/images/logo_blackxs.png" alt="Logo" />
+      <ul>
+        <li class="active">Dashboard</li>
+        <li>Tournaments</li>
+        <li>Settings</li>
+      </ul>
+    </aside>
+
+    <!-- Main content area -->
+    <div class="main-area">
+      <main class="main-content">
+        <!-- Header -->
+        <header>
+          <div class="admin-profile">
+            <img src="../src/views/images/user-icon.png" alt="Admin Avatar" />
+            <div class="admin-info" id="loggedInUser">
+              <strong>Admin</strong><br />
+              <small>matchhub@matchhubadmin.com</small>
+            </div>
+          </div>
+          <button id="logoutBtn" class="logout-btn" onclick="logout()">Logout</button>
+        </header>
+
+        <!-- Stats -->
+        <section class="stats">
+          <div class="card">
+            <h3>Active Tournaments</h3>
+            <p id="number-of-active-tournaments">0</p>
+          </div>
+          <!-- <div class="card"> // We can implement this logic after MVP
+            <h3>Upcoming Matches</h3>
+            <p>5</p>
+          </div> -->
+          <div class="card">
+            <h3>Participants</h3>
+            <p id="number-of-participants">0</p>
+          </div>
+        </section>
+
+        <!-- Manage Tournaments -->
+        <section class="tournaments">
+          <div class="section-header">
+            <h2>Tournaments</h2>
+            <a id="new-tournament-button" href="forms.html" class="btn-primary">+ New Tournament</a>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th># of Players</th>
+                <th>Location</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="manage-tournaments-table-body">
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Recent Matches -->
+        <section class="recent-matches">
+          <h3>Matches</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Tournament</th>
+                <th>Round</th>
+                <th>Match</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tournament-matches-table-body">
+            </tbody>
+          </table>
+        </section>
+      </main>
+
+      <!-- Footer ALWAYS at bottom -->
+      <footer class="admin-footer">
+        <div class="footer-content">
+          <span>© 2025 MatchHub. All rights reserved.</span>
+          <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Support</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>

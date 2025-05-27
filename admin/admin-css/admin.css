@@ -152,6 +152,7 @@ th, td{
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .btn-primary:hover {

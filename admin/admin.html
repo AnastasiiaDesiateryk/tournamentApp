@@ -9,7 +9,7 @@
     <script>
     const user = JSON.parse(localStorage.getItem("matchhub_user"));
     if (!user || user.role !== "admin") {
-        window.location.href = "login.html";
+        window.location.href = "../src/views/login.html";
     }
     </script>
 </head>
@@ -60,7 +60,7 @@
         <section class="tournaments">
           <div class="section-header">
             <h2>Manage Tournaments</h2>
-            <button class="btn-primary">+ New Tournament</button>
+            <a href="forms.html" class="btn-primary">+ New Tournament</a>
           </div>
           <table>
             <thead>

@@ -1,5 +1,5 @@
 // === Auth & User display ===
-const user = getLoggedInUser();
+const user = JSON.parse(localStorage.getItem("matchhub_user"));
 
 if (!user || user.role !== "player") {
   window.location.href = "login.html";

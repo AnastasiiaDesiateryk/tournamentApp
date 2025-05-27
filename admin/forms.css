@@ -105,33 +105,3 @@ input[type="checkbox"] {
     font-weight: 600;
     margin-top: 1rem;
 }
-
-
-#participant-results {
-    list-style: none;
-    padding: 0;
-    border: 1px solid #ccc;
-    max-height: 150px;
-    overflow-y: auto;
-    position: absolute;
-    background: white;
-    z-index: 10;
-}
-
-#participant-results li {
-    padding: 5px;
-    cursor: pointer;
-}
-
-#participant-results li:hover {
-    background-color: #f0f0f0;
-}
-
-#selected-participants {
-    list-style: none;
-    padding: 0;
-}
-
-#selected-participants li {
-    margin-bottom: 5px;
-}

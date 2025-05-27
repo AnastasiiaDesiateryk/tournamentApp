@@ -1,4 +1,6 @@
-
+const TOURNAMENTS_KEY = "TOURNAMENTS";
+let users = [];
+let tournaments = [];
 
 
 const generateRandomId = () => {
@@ -6,9 +8,62 @@ const generateRandomId = () => {
   return id.toString();
 }
 
-const createTournament = (tournament) => {
+const user1 = {
+  id: generateRandomId(),
+  name: "User1"
+}
+
+const user2 = {
+  id: generateRandomId(),
+  name: "User2"
+}
+
+const user3 = {
+  id: generateRandomId(),
+  name: "User3"
+}
+
+const user4 = {
+  id: generateRandomId(),
+  name: "User4"
+}
+
+const user5 = {
+  id: generateRandomId(),
+  name: "User5"
+}
+
+users = [user1, user2, user3, user4, user5];
+
+const getTournaments = () => {
+  const tempTournaments = localStorage.getItem(TOURNAMENTS_KEY);
+  if (tempTournaments) {
+    tournaments = JSON.parse(tempTournaments);
+  }
+  return tournaments;
+}
+const saveTournaments = () => {
+  localStorage.setItem(TOURNAMENTS_KEY, JSON.stringify(tournaments));
+}
+
+// DELETE THIS FUNCTION
+const saveUsers = () => {
+  const tempUsers = localStorage.getItem("USERS");
+  if (tempUsers) {
+    users = JSON.parse(tempUsers);
+  }
+}
+
+const createTournament = (title, date) => {
   getTournaments();
-  tournaments.push(tournament);
+  const newTournament = {
+    id: generateRandomId(),
+    title: title,
+    date: date,
+    users: [],
+    groups: []
+  }
+  tournaments.push(newTournament);
   saveTournaments();
 }
 
@@ -32,7 +87,7 @@ const addUserToTournament = (userId, tournamentId) => {
 const generateRoundRobin = (users) => {
   // [ [ [1,2],[3,4] ], [ [1,3], [2,4] ], [ [1,4], [2,3] ] ]
   if (users.length % 2 !== 0) {
-    users.push("ByPass");
+    users.push("-1");
   }
   const matches = [];
   const numRounds = users.length - 1;

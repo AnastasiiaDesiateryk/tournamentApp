@@ -1,5 +1,37 @@
-//Constant variables
+const GROUP_INVITATION_KEY = "GROUP_INVITATIONS";
+const TOURNAMENT_INVITATION_KEY = "TOURNAMENT_INVITATIONS";
 
+let groupInvitations = [];
+let tournamentInvitations = [];
+
+//Constant variables
+const InvitationStatus = {
+  ACCEPTED: "ACCEPTED",
+  REJECTED: "REJECTED",
+  PENDING: "PENDING"
+}
+
+function saveGroupInvitations() {
+  localStorage.setItem(GROUP_INVITATION_KEY, JSON.stringify(groupInvitations))
+}
+
+function getGroupInvitations() {
+  const localInvitations = localStorage.getItem(GROUP_INVITATION_KEY)
+  if (localInvitations != null) {
+    groupInvitations = JSON.parse(localInvitations)
+  }
+}
+
+function saveTournamentInvitations() {
+  localStorage.setItem(TOURNAMENT_INVITATION_KEY, JSON.stringify(tournamentInvitations))
+}
+
+function getTournamentInvitations() {
+  const localInvitations = localStorage.getItem(TOURNAMENT_INVITATION_KEY)
+  if (localInvitations != null) {
+    tournamentInvitations = JSON.parse(localInvitations)
+  }
+}
 
 // Admin to User
 

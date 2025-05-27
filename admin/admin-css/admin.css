@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -84,7 +83,7 @@ header {
     background-color: #ef4444;
     color: white;
     border: none;
-    padding: 0, 5rem 1rem;
+    padding: 0,5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
@@ -140,8 +139,7 @@ table {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-th,
-td {
+th, td{
     padding: 1rem;
     text-align: left;
     border-bottom: 1px solid #e5e7eb;
@@ -186,7 +184,6 @@ td {
     padding: 1rem 2rem;
     font-size: 0.875rem;
 }
-
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -195,7 +192,6 @@ td {
     max-width: 1200px;
     margin: auto;
 }
-
 .footer-links a {
     color: #e5e7eb;
     text-decoration: none;
@@ -204,12 +200,4 @@ td {
 
 .footer-links a:hover {
     color: #60a5fa;
-}
-
-.footer-links a:hover {
-    color: #60a5fa;
-}
-
-.hidden {
-    display: none;
 }

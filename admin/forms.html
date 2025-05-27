@@ -1,63 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Tournament</title>
     <link rel="stylesheet" href="forms.css">
 </head>
-<header class="form-navbar">
+    <header class="form-navbar">
     <div class="navbar-content">
         <img src="../src/views/images/logo_blackxs.png" alt="MatchHub Logo" class="navbar-logo" />
     </div>
-</header>
-
+    </header>
 <body>
     <div class="form-container">
         <h1> Create New Tournament</h1>
+        <p class="step-indicator">Step <span id="step-number">1</span> of 3</p>
 
-        <form>
+        <form id="multiStepForm">
             <!--Step 1: Tournament Info-->
-            <div class="active">
+            <div class="form-step active" data-step="1">
                 <label for="tournament-name">Tournament Name</label>
                 <input type="text" id="tournament-name" required>
 
                 <label for="date">Start Date</label>
                 <input type="date" id="date" required>
 
+                <div class="form navigation">
+                    <span></span>
+                    <button type="button" class="btn-primary next-btn">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Venue-->
+            <div class="form-step" data-step="2">
                 <div id="venue-field">
                     <label for="venue"> Venue Address</label>
-                    <input type="text" id="venue" placeholder="e.g Geneva Arena" />
+                    <input type="text" id="venue" placeholder="e.g Geneva Arena"/>
                 </div>
 
                 <label>
-                    <input type="checkbox" id="online" />
+                    <input type="checkbox" id="online"/>
                     This is an online tournament
                 </label>
 
-                <div id="participant-search">
-                    <label for="participant-search-input">Add Participant</label>
-                    <input type="text" id="participant-search-input" placeholder="Search username..."
-                        autocomplete="off" />
-                    <ul id="participant-results"></ul>
+                <div class="form-navigation">
+                    <button type="button" class="btn-secondary prev-btn">Back</button>
+                    <button type="button" class="btn-primary next-btn">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Participants-->
+            <div class="form-step" data-step="3">
+                <div id="participant">
+                    <label ></label>
+                    <input type="text" name="participant[]" placeholder="Participant"/>
                 </div>
 
-                <div id="participant-list">
-                    <h4>Selected Participants:</h4>
-                    <ul id="selected-participants"></ul>
-                </div>
+                <button type="button" id="addParticipant" class="btn-secondary">+ Add Participant</button>
 
                 <div class="form-navigation">
                     <button type="button" class="btn-secondary prev-btn">Back</button>
-                    <button type="button" id="create-tournament-submit-button" class="btn-primary">Submit</button>
+                    <button type="submit" class="btn-primary">Submit</button>
                 </div>
             </div>
         </form>
     </div>
-    <script src="../data/data.js"></script>
-    <script src="../src/js/tournament.js"></script>
     <script src="forms.js"></script>
 </body>
-
 </html>

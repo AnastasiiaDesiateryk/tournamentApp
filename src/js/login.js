@@ -1,8 +1,3 @@
-const USERS = [
-    { username: "admin", password: "matchHub", role: "admin" },
-    { username: "player1", password: "player123", role: "player" }
-];
-
 // Handle login form
 const loginForm = document.getElementById("loginForm");
 
@@ -16,13 +11,16 @@ loginForm.addEventListener("submit", function (e) {
 
     if (user) {
         // Store session
-        localStorage.setItem("matchhub_user", JSON.stringify(user));
-        
-        if (user.role === "admin") {
-            window.location.href = "../../admin/admin.html";
-        } else if (user.role === "player") {
-            window.location.href = "../views/dashboard-user.html";
-        }
+        saveLoggedInUser({
+            username: user.username,
+            role: user.role
+        })
+        window.location.href = "../../admin/admin.html";
+        // if (user.role === "admin") {
+        //     window.location.href = "../../admin/admin.html";
+        // } else if (user.role === "player") {
+        //     window.location.href = "../views/dashboard-user.html";
+        // }
     } else {
         alert("Invalid username or password");
     }

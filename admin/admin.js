@@ -31,8 +31,7 @@ const renderManagedTournamentsTable = () => {
           <button class="btn-secondary" onclick="generateMatches(${tournamentItem.id})">Generate Matches</button>
           <button class="btn-danger" onclick="deleteTournamentItem(${tournamentItem.id})">Delete</button>
         </td>
-        `
-        :
+        `:
         `<td>\
         <button class="btn-secondary">View</button>
         </td>`}
@@ -112,7 +111,7 @@ const getNumberOfParticipants = () => {
 const isNewTournamentButtonVisible = () => {
   const newTournamentButton = document.getElementById('new-tournament-button');
 
-  if (user !== 'admin') {
+  if (user.role !== 'admin') {
     newTournamentButton.classList.add('hidden');
   }
 }

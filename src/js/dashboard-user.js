@@ -7,251 +7,47 @@ if (!user || user.role !== "player") {
   document.querySelector(".username").textContent = user.username;
 }
 
+// ✅
+const getUsernameById = (userId) => {
+  const user = USERS.find((user) => user.id == userId);
+  return user?.username || "ByPass";
+};
 // === Logout ===
 document.getElementById("logout").addEventListener("click", () => {
   localStorage.removeItem("matchhub_user");
   window.location.href = "login.html";
 });
 
-// === Match Data ===
-const matches = [
-  {
-    group: "Group A",
-    round: "Round 1",
-    pitch: "Pitch 1",
-    time: "10:00",
-    teams: "Atalanta vs Barcelona",
-    score: "1:2",
-    winner: "Barcelona",
-  },
-  {
-    group: "Group A",
-    round: "Round 1",
-    pitch: "Pitch 2",
-    time: "10:00",
-    teams: "Liverpool vs Inter",
-    score: "3:0",
-    winner: "Liverpool",
-  },
-  {
-    group: "Group A",
-    round: "Quarter-final",
-    pitch: "Pitch 1",
-    time: "10:45",
-    teams: "Chelsea vs Atlético",
-    score: "0:0",
-    winner: "Draw",
-  },
-  {
-    group: "Group B",
-    round: "Quarter-final",
-    pitch: "Pitch 2",
-    time: "10:45",
-    teams: "Man City vs Napoli",
-    score: "2:1",
-    winner: "Man City",
-  },
-  {
-    group: "Group A",
-    round: "Round 1",
-    pitch: "Pitch 1",
-    time: "11:30",
-    teams: "Barcelona vs Chelsea",
-    score: "1:0",
-    winner: "Barcelona",
-  },
-  {
-    group: "Group A",
-    round: "Round 1",
-    pitch: "Pitch 2",
-    time: "11:30",
-    teams: "Inter vs Man City",
-    score: "1:3",
-    winner: "Man City",
-  },
-  {
-    group: "Group B",
-    round: "Round 2",
-    pitch: "Pitch 1",
-    time: "12:00",
-    teams: "Napoli vs Atlético",
-    score: "2:2",
-    winner: "Draw",
-  },
-  {
-    group: "Group B",
-    round: "Round 2",
-    pitch: "Pitch 2",
-    time: "12:00",
-    teams: "Atalanta vs Man City",
-    score: "1:3",
-    winner: "Man City",
-  },
-  {
-    group: "Group A",
-    round: "Semi-final",
-    pitch: "Pitch 1",
-    time: "13:00",
-    teams: "Liverpool vs Chelsea",
-    score: "1:1",
-    winner: "Draw",
-  },
-  {
-    group: "Group B",
-    round: "Semi-final",
-    pitch: "Pitch 2",
-    time: "13:00",
-    teams: "Barcelona vs Napoli",
-    score: "3:2",
-    winner: "Barcelona",
-  },
-  {
-    group: "Group A",
-    round: "Final",
-    pitch: "Pitch 1",
-    time: "14:00",
-    teams: "Barcelona vs Liverpool",
-    score: "2:0",
-    winner: "Barcelona",
-  },
-  {
-    group: "Group B",
-    round: "Final",
-    pitch: "Pitch 2",
-    time: "14:00",
-    teams: "Man City vs Atlético",
-    score: "1:1",
-    winner: "Draw",
-  },
-  {
-    group: "Group A",
-    round: "3rd Place",
-    pitch: "Pitch 1",
-    time: "15:00",
-    teams: "Chelsea vs Napoli",
-    score: "0:1",
-    winner: "Napoli",
-  },
-  {
-    group: "Group B",
-    round: "3rd Place",
-    pitch: "Pitch 2",
-    time: "15:00",
-    teams: "Inter vs Atalanta",
-    score: "2:2",
-    winner: "Draw",
-  },
-  {
-    group: "Group A",
-    round: "Consolation",
-    pitch: "Pitch 1",
-    time: "16:00",
-    teams: "Chelsea vs Atalanta",
-    score: "1:2",
-    winner: "Atalanta",
-  },
-  {
-    group: "Group B",
-    round: "Consolation",
-    pitch: "Pitch 2",
-    time: "16:00",
-    teams: "Napoli vs Inter",
-    score: "0:3",
-    winner: "Inter",
-  },
-  {
-    group: "Group A",
-    round: "Bonus Match",
-    pitch: "Pitch 1",
-    time: "17:00",
-    teams: "Barcelona vs Atlético",
-    score: "3:1",
-    winner: "Barcelona",
-  },
-  {
-    group: "Group B",
-    round: "Bonus Match",
-    pitch: "Pitch 2",
-    time: "17:00",
-    teams: "Man City vs Liverpool",
-    score: "2:2",
-    winner: "Draw",
-  },
-  {
-    group: "Group A",
-    round: "Late Game",
-    pitch: "Pitch 1",
-    time: "20:00",
-    teams: "Barcelona vs Inter",
-    score: "1:1",
-    winner: "Draw",
-  },
-  {
-    group: "Group B",
-    round: "Late Game",
-    pitch: "Pitch 2",
-    time: "20:00",
-    teams: "Chelsea vs Man City",
-    score: "0:2",
-    winner: "Man City",
-  },
-  {
-    group: "Group A",
-    round: "Night Showdown",
-    pitch: "Pitch 1",
-    time: "21:00",
-    teams: "Atlético vs Liverpool",
-    score: "1:4",
-    winner: "Liverpool",
-  },
-  {
-    group: "Group B",
-    round: "Night Showdown",
-    pitch: "Pitch 2",
-    time: "21:00",
-    teams: "Napoli vs Atalanta",
-    score: "2:2",
-    winner: "Draw",
-  },
-  {
-    group: "Group A",
-    round: "Closing Match",
-    pitch: "Pitch 1",
-    time: "22:00",
-    teams: "Barcelona vs Man City",
-    score: "1:0",
-    winner: "Barcelona",
-  },
-  {
-    group: "Group B",
-    round: "Closing Match",
-    pitch: "Pitch 2",
-    time: "22:00",
-    teams: "Inter vs Atlético",
-    score: "1:1",
-    winner: "Draw",
-  },
-  {
-    group: "Group A",
-    round: "Final Show",
-    pitch: "Pitch 1",
-    time: "23:00",
-    teams: "Liverpool vs Napoli",
-    score: "2:1",
-    winner: "Liverpool",
-  },
-  {
-    group: "Group B",
-    round: "Final Show",
-    pitch: "Pitch 2",
-    time: "23:00",
-    teams: "Chelsea vs Inter",
-    score: "0:0",
-    winner: "Draw",
-  },
-];
-
 // === Utility ===
+function getAllMatchesFromTournaments() {
+  const tournaments = getTournaments();
+  const allMatches = [];
+
+  tournaments.forEach((tournament) => {
+    // Игнорируем турниры, в которых не участвует текущий пользователь
+    if (!tournament.users.map(String).includes(String(user.id))) return;
+
+    tournament.matches?.forEach((round, roundIndex) => {
+      round.forEach((match) => {
+        const [team1Id, team2Id] = match;
+        const team1 = getUsernameById(team1Id);
+        const team2 = getUsernameById(team2Id);
+        allMatches.push({
+          group: tournament.name,
+          round: `Round ${roundIndex + 1}`,
+          pitch: "Pitch 1",
+          time: "00:00",
+          teams: `${team1} vs ${team2}`,
+          score: "N/A",
+          winner: "TBD",
+        });
+      });
+    });
+  });
+
+  return allMatches;
+}
+
 function isMatchLive(matchTimeStr) {
   const now = new Date();
   const [hours, minutes] = matchTimeStr.split(":").map(Number);
@@ -301,6 +97,9 @@ const [groupSelect, roundSelect, pitchSelect] = document.querySelectorAll(
 );
 const clearBtn = document.querySelector(".clear");
 
+const matches = getAllMatchesFromTournaments(); // добавила
+console.log("Current user:", user);
+console.log("Loaded matches:", matches);
 // === Populate Filters ===
 function populateFilters() {
   const unique = (arr) => [...new Set(arr)];

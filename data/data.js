@@ -7,17 +7,17 @@ const LOGGED_IN_USER_KEY = "LOGGED_IN_USER";
 
 // Login Users
 const USERS = [
-  { id: "0", username: "admin", password: "matchHub", role: "admin" },
-  { id: "1", username: "player1", password: "player123", role: "player" },
-  { id: "2", username: "player2", password: "player123", role: "player" },
-  { id: "3", username: "player3", password: "player123", role: "player" },
-  { id: "4", username: "player4", password: "player123", role: "player" },
-  { id: "5", username: "player5", password: "player123", role: "player" },
-  { id: "6", username: "player6", password: "player123", role: "player" },
-  { id: "7", username: "player7", password: "player123", role: "player" },
-  { id: "8", username: "player8", password: "player123", role: "player" },
-  { id: "9", username: "player9", password: "player123", role: "player" },
-  { id: "10", username: "player10", password: "player123", role: "player" }
+  { id: "0", username: "Admin", password: "matchHub", role: "admin" },
+  { id: "1", username: "Barcelona", password: "player123", role: "player" },
+  { id: "2", username: "Liverpool", password: "player123", role: "player" },
+  { id: "3", username: "Juventus", password: "player123", role: "player" },
+  { id: "4", username: "Galatasaray", password: "player123", role: "player" },
+  { id: "5", username: "MagnusC", password: "player123", role: "player" },
+  { id: "6", username: "HikaruN", password: "player123", role: "player" },
+  { id: "7", username: "GukeshD", password: "player123", role: "player" },
+  { id: "8", username: "RogerF", password: "player123", role: "player" },
+  { id: "9", username: "BelindaB", password: "player123", role: "player" },
+  { id: "10", username: "CelineN", password: "player123", role: "player" }
 
 ];
 

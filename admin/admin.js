@@ -31,7 +31,6 @@ const renderManagedTournamentsTable = () => {
           user.role == "admin"
             ? `
         <td>
-          <button class="btn-secondary">View</button>
           <button class="btn-secondary">Edit</button>
           <button class="btn-secondary" onclick="generateMatches(${tournamentItem.id})">Generate Matches</button>
           <button class="btn-danger" onclick="deleteTournamentItem(${tournamentItem.id})">Delete</button>

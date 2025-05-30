@@ -2,7 +2,7 @@
 
 **Project Duration:** 2 Weeks  
 **Team Members:** 4  
-**Tech Stack:** HTML, CSS, JavaScript (LocalStorage / Optional simulated backend)
+**Tech Stack:** HTML, CSS, JavaScript (LocalStorage)
 
 ---
 
@@ -61,16 +61,41 @@ This MVP focuses on two tournament formats: **Knockout** and **Round Robin**, wi
 ## 📦 File Structure
 ```
 tournament-app/
-├── index.html (optional landing)
-├── login.html
-├── admin.html
-├── player.html
-├── css/
-│   └── style.css
-├── js/
-│   ├── main.js
-│   ├── tournament.js
-│   └── storage.js
+├── .vscode/
+│    └── settings.json
+├── admin/
+│    ├── admin-css/
+│    │    └── admin.css
+│    ├── admin.js
+│    ├── dashboard.html
+│    ├── forms.css
+│    ├── forms.html
+│    └── forms.js
+├── data/
+│    ├── constants.js
+│    ├── data.js
+│    ├── tournaments.json
+│    └── utils.js
+├── public/
+│    ├── index.css
+│    ├── index.html
+│    ├── logo.png
+│    └── pexels.js
+├── src/
+│   ├── css/
+│   │    ├── dashboard-user.css
+│   │    └── login.css
+│   ├── js/
+│   │    ├── auth.js
+│   │    ├── dashboard-user.js
+│   │    ├── dashboard.js
+│   │    ├── invitation.js
+│   │    └── tournament.js
+│   └── views/
+│   │    ├── images/
+
+│   │    ├── dashboard-user.html
+│   │    └── login.html
 └── README.md
 ```
 
